@@ -22,10 +22,22 @@ ruleTester.run("no-unstubbed-sinon-before-expect", rule, {
 
   valid: [
     {
-      code:`it("passes shit", () => {
+      code:`it("passes with unstub before expect", () => {
         var ajaxStub = sinon.stub(AjaxHelpers, 'post', ajaxCallBack);
         ajaxStub.restore();
         expect(true).toEqual('cat');
+      });`,
+      globals: ['it'],
+      parserOptions: { ecmaVersion: 6  },
+    },
+    {
+      code:`it("passes with a promise", () => {
+        var ajaxStub = sinon.stub(AjaxHelpers, 'post', ajaxCallBack);
+        const promise = Promise.resolve(ajaxStub);
+        return Promise.all(promise).then(() => {
+          ajaxStub.restore();
+          expect(true).toEqual('cat');
+        })
       });`,
       globals: ['it'],
       parserOptions: { ecmaVersion: 6  },
