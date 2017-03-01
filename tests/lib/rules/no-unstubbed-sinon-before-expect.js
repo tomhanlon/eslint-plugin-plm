@@ -42,6 +42,15 @@ ruleTester.run("no-unstubbed-sinon-before-expect", rule, {
       globals: ['it'],
       parserOptions: { ecmaVersion: 6  },
     },
+    {
+      code:`it("passes with unstub before expect", function() {
+        var ajaxStub = sinon.stub(AjaxHelpers, 'post', ajaxCallBack);
+        ajaxStub.restore();
+        expect(true).toEqual('cat');
+      });`,
+      globals: ['it'],
+      parserOptions: { ecmaVersion: 6  },
+    },
   ],
 
   invalid: [
@@ -73,6 +82,19 @@ ruleTester.run("no-unstubbed-sinon-before-expect", rule, {
         message: "Call `stub.restore()` before `expect`",
         type: "CallExpression",
       }]
-    }
+    },
+    {
+      code:`it("should fail", function() {
+        var ajaxStub = sinon.stub(AjaxHelpers, 'post', ajaxCallBack);
+        expect(true).toEqual('cat');
+        ajaxStub.restore();
+      });`,
+      parserOptions: { ecmaVersion: 6  },
+      globals: ['it'],
+      errors: [{
+        message: "Call `stub.restore()` before `expect`",
+        type: "CallExpression",
+      }]
+    },
   ]
 });
