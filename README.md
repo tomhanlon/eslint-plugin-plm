@@ -44,9 +44,6 @@ Then configure the rules you want to use under the rules section.
 
 ## Supported Rules
 
-<<<<<<< HEAD
-* Fill in provided rules here
-=======
 See `lib/rules/`
 
 ## Adding a Rule
