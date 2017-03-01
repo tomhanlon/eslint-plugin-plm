@@ -64,7 +64,7 @@ ruleTester.run("no-unstubbed-sinon-before-expect", rule, {
 
   invalid: [
     {
-      code:`it("should fail", () => {
+      code:`it("should fail if a single stub is not restored", () => {
         var ajaxStub = sinon.stub(AjaxHelpers, 'post', ajaxCallBack);
         expect(true).toEqual('cat');
         ajaxStub.restore();
@@ -72,12 +72,12 @@ ruleTester.run("no-unstubbed-sinon-before-expect", rule, {
       parserOptions: { ecmaVersion: 6  },
       globals: ['it'],
       errors: [{
-        message: "Call `stub.restore()` before `expect`",
+        message: "Call 'ajaxStub.restore()' before 'expect'",
         type: "CallExpression",
       }]
     },
     {
-      code:`it("should fail", () => {
+      code:`it("should fail if a stub is not restored in a promise", () => {
         const ajaxStub = sinon.stub(AjaxHelpers, 'post', ajaxCallBack);
         const promise = Promise.resolve(ajaxStub);
         return Promise.all(promise).then(() => {
@@ -88,33 +88,20 @@ ruleTester.run("no-unstubbed-sinon-before-expect", rule, {
       parserOptions: { ecmaVersion: 6  },
       globals: ['it'],
       errors: [{
-        message: "Call `stub.restore()` before `expect`",
+        message: "Call 'ajaxStub.restore()' before 'expect'",
         type: "CallExpression",
       }]
     },
     {
-      code:`it("should fail", function() {
-        var ajaxStub = sinon.stub(AjaxHelpers, 'post', ajaxCallBack);
-        expect(true).toEqual('cat');
-        ajaxStub.restore();
-      });`,
-      parserOptions: { ecmaVersion: 6  },
-      globals: ['it'],
-      errors: [{
-        message: "Call `stub.restore()` before `expect`",
-        type: "CallExpression",
-      }]
-    },
-    {
-      code:`it("should fail on an unrestored spy", function() {
-        var ajaxSpy = sinon.spy(AjaxHelpers, 'post');
+      code:`it("should fail if a spy is not restored", function() {
+        var ajaxSpy = sinon.spy(AjaxHelpers, 'post', ajaxCallBack);
         expect(true).toEqual('cat');
         ajaxSpy.restore();
       });`,
       parserOptions: { ecmaVersion: 6  },
       globals: ['it'],
       errors: [{
-        message: "Call `stub.restore()` before `expect`",
+        message: "Call 'ajaxSpy.restore()' before 'expect'",
         type: "CallExpression",
       }]
     },
@@ -124,16 +111,34 @@ ruleTester.run("no-unstubbed-sinon-before-expect", rule, {
         var someStub = sinon.stub(SomeHelper, 'method', callback);
         expect(true).toEqual('cat');
         ajaxSpy.restore();
+        someStub.restore();
       });`,
       parserOptions: { ecmaVersion: 6  },
       globals: ['it'],
       errors: [
         {
-          message: "Call `stub.restore()` before `expect`",
+          message: "Call 'ajaxSpy.restore()' before 'expect'",
           type: "CallExpression",
         },
         {
-          message: "Call `stub.restore()` before `expect`",
+          message: "Call 'someStub.restore()' before 'expect'",
+          type: "CallExpression",
+        }
+      ]
+    },
+    {
+      code:`it("should report a single violation when multiple stubs in a test", function() {
+        var ajaxSpy = sinon.spy(AjaxHelpers, 'post');
+        var anotherSpy = sinon.spy(SomeHelper, 'method');
+        anotherSpy.restore();
+        expect(true).toEqual('cat');
+        ajaxSpy.restore();
+      });`,
+      parserOptions: { ecmaVersion: 6  },
+      globals: ['it'],
+      errors: [
+        {
+          message: `Call 'ajaxSpy.restore()' before 'expect'`,
           type: "CallExpression",
         }
       ]
