@@ -11,22 +11,22 @@ You'll first need to install [ESLint](http://eslint.org):
 $ npm i eslint --save-dev
 ```
 
-Next, install `eslint-plugin-sinon-no-unrestored-stubs`:
+Next, install `eslint-plugin-plm`:
 
 ```
-$ npm install eslint-plugin-sinon-no-unrestored-stubs --save-dev
+$ npm install eslint-plugin-plm
 ```
 
-**Note:** If you installed ESLint globally (using the `-g` flag) then you must also install `eslint-plugin-sinon-no-unrestored-stubs` globally.
+**Note:** If you installed ESLint globally (using the `-g` flag) then you must also install `eslint-plugin-plm` globally.
 
 ## Usage
 
-Add `sinon-no-unrestored-stubs` to the plugins section of your `.eslintrc` configuration file. You can omit the `eslint-plugin-` prefix:
+Add `plm` to the plugins section of your `.eslintrc` configuration file. You can omit the `eslint-plugin-` prefix:
 
 ```json
 {
     "plugins": [
-        "sinon-no-unrestored-stubs"
+        "plm"
     ]
 }
 ```
@@ -37,11 +37,35 @@ Then configure the rules you want to use under the rules section.
 ```json
 {
     "rules": {
-        "sinon-no-unrestored-stubs/rule-name": 2
+        "plm/rule-name": 2
     }
 }
 ```
 
 ## Supported Rules
 
+<<<<<<< HEAD
 * Fill in provided rules here
+=======
+See `lib/rules/`
+
+## Adding a Rule
+
+This project uses yoeman http://yeoman.io/. To add a new rule:
+
+```
+  # install dependencies
+  npm install -g yo
+  npm i -g generator-eslint
+
+  # in the eslint-plugin-plm directory run
+  yo eslint:rule
+```
+
+Make sure all tests are passing: `npm run test`.
+
+For more details on writing rules, see
+
+https://medium.com/@btegelund/creating-an-eslint-plugin-87f1cb42767f
+
+Copy and paste the tests cases for your rule into AST explorer to make life easier: https://astexplorer.net/

@@ -1,7 +1,7 @@
 {
-  "name": "eslint-plugin-sinon-no-unrestored-stubs",
+  "name": "eslint-plugin-plm",
   "version": "0.0.0",
-  "description": "TODO",
+  "description": "Custom eslint rules for PatientsLikeMe js projects",
   "keywords": [
     "eslint",
     "eslintplugin",
