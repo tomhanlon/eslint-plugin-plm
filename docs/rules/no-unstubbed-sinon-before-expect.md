@@ -1,36 +1,31 @@
-# no (no-unstubbed-sinon-before-expect)
+# no-unstubbed-sinon-before-expect
 
 Please describe the origin of the rule here.
 
 
 ## Rule Details
 
-This rule aims to...
+This rule aims to stop you from using `sinon.spy` or `sinon.mock` an es6 import
+and forgetting to `restore` the original behavior at the end of your test,
+which results in leaving the spy/stub as a global and polluting the rest of the
+test suite.
 
 Examples of **incorrect** code for this rule:
 
 ```js
-
-// fill me in
-
+it("should fail", function() {
+  var ajaxStub = sinon.stub(AjaxHelpers, 'post', ajaxCallBack);
+  expect(true).toEqual('cat');
+  ajaxStub.restore();
+});
 ```
 
 Examples of **correct** code for this rule:
 
 ```js
-
-// fill me in
-
+it("passes with unstub before expect", function() {
+  var ajaxStub = sinon.stub(AjaxHelpers, 'post', ajaxCallBack);
+  ajaxStub.restore();
+  expect(true).toEqual('cat');
+});
 ```
-
-### Options
-
-If there are any options, describe them here. Otherwise, delete this section.
-
-## When Not To Use It
-
-Give a short description of when it would be appropriate to turn off this rule.
-
-## Further Reading
-
-If there are other links that describe the issue this rule addresses, please include them here in a bulleted list.

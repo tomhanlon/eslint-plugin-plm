@@ -48,7 +48,7 @@ See `lib/rules/`
 
 ## Adding a Rule
 
-This project uses yoeman http://yeoman.io/. To add a new rule:
+This project uses [yoeman](http://yeoman.io/). To add a new rule:
 
 ```
   # install dependencies
@@ -61,8 +61,6 @@ This project uses yoeman http://yeoman.io/. To add a new rule:
 
 Make sure all tests are passing: `npm run test`.
 
-For more details on writing rules, see
+For more details on writing rules, see [this post](https://medium.com/@btegelund/creating-an-eslint-plugin-87f1cb42767f) and the [official docs](http://eslint.org/docs/developer-guide/working-with-rules).
 
-https://medium.com/@btegelund/creating-an-eslint-plugin-87f1cb42767f
-
-Copy and paste the tests cases for your rule into AST explorer to make life easier: https://astexplorer.net/
+Copy and paste the tests cases for your rule into [AST explorer](https://astexplorer.net/) to make life easier.
