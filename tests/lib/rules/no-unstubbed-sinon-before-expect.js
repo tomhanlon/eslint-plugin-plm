@@ -107,7 +107,7 @@ ruleTester.run("no-unstubbed-sinon-before-expect", rule, {
     },
     {
       code:`it("should fail on an unrestored spy", function() {
-        var ajaxSpy = sinon.spy(AjaxHelpers, 'post', ajaxCallBack);
+        var ajaxSpy = sinon.spy(AjaxHelpers, 'post');
         expect(true).toEqual('cat');
         ajaxSpy.restore();
       });`,
@@ -117,6 +117,26 @@ ruleTester.run("no-unstubbed-sinon-before-expect", rule, {
         message: "Call `stub.restore()` before `expect`",
         type: "CallExpression",
       }]
+    },
+    {
+      code:`it("should report multiple violations in a test", function() {
+        var ajaxSpy = sinon.spy(AjaxHelpers, 'post');
+        var someStub = sinon.stub(SomeHelper, 'method', callback);
+        expect(true).toEqual('cat');
+        ajaxSpy.restore();
+      });`,
+      parserOptions: { ecmaVersion: 6  },
+      globals: ['it'],
+      errors: [
+        {
+          message: "Call `stub.restore()` before `expect`",
+          type: "CallExpression",
+        },
+        {
+          message: "Call `stub.restore()` before `expect`",
+          type: "CallExpression",
+        }
+      ]
     },
   ]
 });
