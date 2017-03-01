@@ -21,15 +21,15 @@ var ruleTester = new RuleTester();
 ruleTester.run("no-unstubbed-sinon-before-expect", rule, {
 
   valid: [
-    // {
-    //   code:`it("passes shit", () => {
-    //     var ajaxStub = sinon.stub(AjaxHelpers, 'post', ajaxCallBack);
-    //     ajaxStub.restore();
-    //     expect(true).toEqual('cat');
-    //   });`,
-    //   globals: ['it'],
-    //   parserOptions: { ecmaVersion: 6  },
-    // },
+    {
+      code:`it("passes shit", () => {
+        var ajaxStub = sinon.stub(AjaxHelpers, 'post', ajaxCallBack);
+        ajaxStub.restore();
+        expect(true).toEqual('cat');
+      });`,
+      globals: ['it'],
+      parserOptions: { ecmaVersion: 6  },
+    },
   ],
 
   invalid: [
@@ -42,8 +42,24 @@ ruleTester.run("no-unstubbed-sinon-before-expect", rule, {
       parserOptions: { ecmaVersion: 6  },
       globals: ['it'],
       errors: [{
-        message: "Restore stubs before `expect`",
-        type: "Otherwise terrible things will happen"
+        message: "Call `stub.restore()` before `expect`",
+        type: "CallExpression",
+      }]
+    },
+    {
+      code:`it("should fail", () => {
+        const ajaxStub = sinon.stub(AjaxHelpers, 'post', ajaxCallBack);
+        const promise = Promise.resolve(ajaxStub);
+        return Promise.all(promise).then(() => {
+          expect(true).toEqual('cat');
+          ajaxStub.restore();
+        })
+      });`,
+      parserOptions: { ecmaVersion: 6  },
+      globals: ['it'],
+      errors: [{
+        message: "Call `stub.restore()` before `expect`",
+        type: "CallExpression",
       }]
     }
   ]
