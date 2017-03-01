@@ -25,7 +25,7 @@ ruleTester.run("no-unstubbed-sinon-before-expect", rule, {
       code:`it("passes with unstub before expect", () => {
         var ajaxStub = sinon.stub(AjaxHelpers, 'post', ajaxCallBack);
         ajaxStub.restore();
-        expect(true).toEqual('cat');
+        expect(true).to.equal(true);
       });`,
       globals: ['it'],
       parserOptions: { ecmaVersion: 6  },
@@ -36,7 +36,7 @@ ruleTester.run("no-unstubbed-sinon-before-expect", rule, {
         const promise = Promise.resolve(ajaxStub);
         return Promise.all(promise).then(() => {
           ajaxStub.restore();
-          expect(true).toEqual('cat');
+          expect(true).to.equal(true);
         })
       });`,
       globals: ['it'],
@@ -46,7 +46,7 @@ ruleTester.run("no-unstubbed-sinon-before-expect", rule, {
       code:`it("passes with unstub before expect", function() {
         var ajaxStub = sinon.stub(AjaxHelpers, 'post', ajaxCallBack);
         ajaxStub.restore();
-        expect(true).toEqual('cat');
+        expect(true).to.equal(true);
       });`,
       globals: ['it'],
       parserOptions: { ecmaVersion: 6  },
@@ -55,7 +55,7 @@ ruleTester.run("no-unstubbed-sinon-before-expect", rule, {
       code:`it("passes when spy is restored before expect", () => {
         var ajaxSpy = sinon.spy(AjaxHelpers, 'post', ajaxCallBack);
         ajaxSpy.restore();
-        expect(true).toEqual('cat');
+        expect(true).to.equal(true);
       });`,
       globals: ['it'],
       parserOptions: { ecmaVersion: 6  },
@@ -66,7 +66,7 @@ ruleTester.run("no-unstubbed-sinon-before-expect", rule, {
     {
       code:`it("should fail if a single stub is not restored", () => {
         var ajaxStub = sinon.stub(AjaxHelpers, 'post', ajaxCallBack);
-        expect(true).toEqual('cat');
+        expect(true).to.equal(true);
         ajaxStub.restore();
       });`,
       parserOptions: { ecmaVersion: 6  },
@@ -81,7 +81,7 @@ ruleTester.run("no-unstubbed-sinon-before-expect", rule, {
         const ajaxStub = sinon.stub(AjaxHelpers, 'post', ajaxCallBack);
         const promise = Promise.resolve(ajaxStub);
         return Promise.all(promise).then(() => {
-          expect(true).toEqual('cat');
+          expect(true).to.equal(true);
           ajaxStub.restore();
         })
       });`,
@@ -95,7 +95,7 @@ ruleTester.run("no-unstubbed-sinon-before-expect", rule, {
     {
       code:`it("should fail if a spy is not restored", function() {
         var ajaxSpy = sinon.spy(AjaxHelpers, 'post', ajaxCallBack);
-        expect(true).toEqual('cat');
+        expect(true).to.equal(true);
         ajaxSpy.restore();
       });`,
       parserOptions: { ecmaVersion: 6  },
@@ -109,7 +109,7 @@ ruleTester.run("no-unstubbed-sinon-before-expect", rule, {
       code:`it("should report multiple violations in a test", function() {
         var ajaxSpy = sinon.spy(AjaxHelpers, 'post');
         var someStub = sinon.stub(SomeHelper, 'method', callback);
-        expect(true).toEqual('cat');
+        expect(true).to.equal(true);
         ajaxSpy.restore();
         someStub.restore();
       });`,
@@ -131,7 +131,7 @@ ruleTester.run("no-unstubbed-sinon-before-expect", rule, {
         var ajaxSpy = sinon.spy(AjaxHelpers, 'post');
         var anotherSpy = sinon.spy(SomeHelper, 'method');
         anotherSpy.restore();
-        expect(true).toEqual('cat');
+        expect(true).to.equal(true);
         ajaxSpy.restore();
       });`,
       parserOptions: { ecmaVersion: 6  },
