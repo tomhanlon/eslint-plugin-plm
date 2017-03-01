@@ -7,7 +7,7 @@
     "eslintplugin",
     "eslint-plugin"
   ],
-  "author": "Evan Lloyd",
+  "author": "PLM engineers",
   "main": "lib/index.js",
   "scripts": {
     "test": "mocha tests --recursive"

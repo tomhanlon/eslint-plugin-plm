@@ -1,5 +1,5 @@
 /**
- * @fileoverview no
+ * @fileoverview tests for no-unstubbed-sinon-before-expect
  * @author Evan Lloyd
  */
 "use strict";
