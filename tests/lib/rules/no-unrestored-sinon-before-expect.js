@@ -189,5 +189,25 @@ ruleTester.run('no-unrestored-sinon-before-expect', rule, {
         },
       ],
     },
+    {
+      code: `it("should report a single once when a test has multiple expects", function() {
+        var ajaxSpy = sinon.spy(AjaxHelpers, 'post');
+        var anotherSpy = sinon.spy(SomeHelper, 'method');
+        anotherSpy.restore();
+        expect(true).to.equal(true);
+        expect(true).to.equal(true);
+        expect(true).to.equal(true);
+        expect(true).to.equal(true);
+        ajaxSpy.restore();
+      });`,
+      parserOptions: { ecmaVersion: 6 },
+      globals: ['it'],
+      errors: [
+        {
+          message: "Call 'ajaxSpy.restore()' before 'expect'",
+          type: 'CallExpression',
+        },
+      ],
+    },
   ],
 });
