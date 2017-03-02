@@ -5,23 +5,23 @@ A set of eslint rules for plm javascript projects.
 
 ## Installation
 
-You'll first need to install [ESLint](http://eslint.org):
+This project uses [yarn](https://yarnpkg.com/en/docs/install#mac-tab), but any
+`yarn` commands can be replaced with `npm`.
 
+Dev install
 ```
-$ npm i eslint --save-dev
-```
-
-Next, install `eslint-plugin-plm`:
-
-```
-$ npm install eslint-plugin-plm
+  git clone git@github.com:patientslikeme/eslint-plugin-plm.git
+  cd eslint-plugin-plm
+  yarn install
 ```
 
 **Note:** If you installed ESLint globally (using the `-g` flag) then you must also install `eslint-plugin-plm` globally.
 
 ## Usage
 
-Add `plm` to the plugins section of your `.eslintrc` configuration file. You can omit the `eslint-plugin-` prefix:
+Run `npm install --save-dev eslint-plugin-plm` in your js project.
+Add `plm` to the plugins section of your `.eslintrc` configuration file.
+You can omit the `eslint-plugin-` prefix:
 
 ```json
 {
@@ -48,18 +48,13 @@ See `lib/rules/`
 
 ## Adding a Rule
 
-This project uses [yoeman](http://yeoman.io/). To add a new rule:
+This project uses [yeoman](http://yeoman.io/). To add a new rule:
 
 ```
-  # install dependencies
-  npm install -g yo
-  npm i -g generator-eslint
-
-  # in the eslint-plugin-plm directory run
-  yo eslint:rule
+  yarn generate:rule
 ```
 
-Make sure all tests are passing: `npm run test`.
+Make sure all tests are passing: `yarn run test`.
 
 For more details on writing rules, see [this post](https://medium.com/@btegelund/creating-an-eslint-plugin-87f1cb42767f) and the [official docs](http://eslint.org/docs/developer-guide/working-with-rules).
 
