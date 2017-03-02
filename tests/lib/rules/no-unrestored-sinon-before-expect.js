@@ -75,6 +75,19 @@ ruleTester.run('no-unrestored-sinon-before-expect', rule, {
       parserOptions: { ecmaVersion: 6 },
       globals: ['it'],
     },
+    {
+      code: `describe("passing case with before/after hooks", function() {
+        let spy;
+        beforeEach(() => {
+          spy = sinon.spy(someHelper, 'someMethod');
+        });
+        afterEach(() => {
+          spy.restore();
+        });
+      });`,
+      parserOptions: { ecmaVersion: 6 },
+      globals: ['it'],
+    },
   ],
 
   invalid: [
@@ -148,6 +161,24 @@ ruleTester.run('no-unrestored-sinon-before-expect', rule, {
         anotherSpy.restore();
         expect(true).to.equal(true);
         ajaxSpy.restore();
+      });`,
+      parserOptions: { ecmaVersion: 6 },
+      globals: ['it'],
+      errors: [
+        {
+          message: "Call 'ajaxSpy.restore()' before 'expect'",
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      code: `describe("failing case with before/after hooks", function() {
+        let spy;
+        beforeEach(() => {
+          spy = sinon.spy(someHelper, 'someMethod');
+        });
+        afterEach(() => {
+        });
       });`,
       parserOptions: { ecmaVersion: 6 },
       globals: ['it'],
