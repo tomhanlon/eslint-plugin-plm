@@ -11,15 +11,23 @@
   "main": "lib/index.js",
   "scripts": {
     "test": "mocha tests --recursive",
-    "generate:rule": "yo eslint:rule"
+    "generate:rule": "yo eslint:rule",
+    "lint": "eslint --ext .js,.jsx --ignore-path ./config/.eslintignore --cache --cache-location ./config/.eslintcache . && echo \"eslint: no lint errors found\" || true",
+    "lint:watch": "onchange \"**/*.js*\" \"test/**/*.js*\" -- yarn lint"
   },
   "dependencies": {
     "requireindex": "~1.1.0"
   },
   "devDependencies": {
-    "eslint": "~3.9.1",
+    "babel-eslint": "^7.1.1",
+    "eslint": "^3.16.1",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-react": "^6.10.0",
     "generator-eslint": "^1.2.0",
     "mocha": "^3.1.2",
+    "onchange": "^3.2.1",
     "yo": "^1.8.5"
   },
   "engines": {
