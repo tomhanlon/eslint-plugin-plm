@@ -10,14 +10,17 @@
   "author": "PLM engineers",
   "main": "lib/index.js",
   "scripts": {
-    "test": "mocha tests --recursive"
+    "test": "mocha tests --recursive",
+    "generate:rule": "yo eslint:rule"
   },
   "dependencies": {
     "requireindex": "~1.1.0"
   },
   "devDependencies": {
     "eslint": "~3.9.1",
-    "mocha": "^3.1.2"
+    "generator-eslint": "^1.2.0",
+    "mocha": "^3.1.2",
+    "yo": "^1.8.5"
   },
   "engines": {
     "node": ">=0.10.0"
