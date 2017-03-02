@@ -11,6 +11,7 @@
   "main": "lib/index.js",
   "scripts": {
     "test": "mocha tests --recursive",
+    "test:watch": "onchange \"./**/*.js*\" -- mocha tests --recursive || true",
     "generate:rule": "yo eslint:rule",
     "lint": "eslint --ext .js,.jsx --ignore-path ./config/.eslintignore --cache --cache-location ./config/.eslintcache . && echo \"eslint: no lint errors found\" || true",
     "lint:watch": "onchange \"**/*.js*\" \"test/**/*.js*\" -- yarn lint"
