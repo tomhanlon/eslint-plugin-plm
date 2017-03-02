@@ -1,4 +1,4 @@
-# no-unstubbed-sinon-before-expect
+# no-unrestored-sinon-before-expect
 
 Please describe the origin of the rule here.
 
