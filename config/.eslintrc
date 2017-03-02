@@ -1,0 +1,35 @@
+// override some rules from style guide: https://github.com/airbnb/javascript
+{
+  'root': true,
+  'extends': 'airbnb',
+  'parser': 'babel-eslint',
+  'env': {
+    'browser': true,
+  },
+  'rules': {
+    'arrow-parens': [2, 'always'],
+    'class-methods-use-this': 'off', // re-enable this in the future (10)
+    'comma-dangle': ['error', {
+      'arrays': 'always-multiline',
+      'objects': 'always-multiline',
+      'imports': 'always-multiline',
+      'exports': 'always-multiline',
+      'functions': 'ignore',
+    }],
+    // 'complexity': ['error', { 'max': 5 }],
+    'id-length': ['error', { 'exceptions': ['_', 'i'] }],
+    'import/no-extraneous-dependencies': ['error', { 'devDependencies': true }], // re-enable this in the future
+    'import/no-webpack-loader-syntax': 'off', // this needs to be disabled to allow raw-loader to work
+    'max-len': [2, 150, 4],
+    'no-implicit-globals': 'error',
+    // 'no-magic-numbers': ['error', { 'ignore': [0, 1], 'ignoreArrayIndexes': true, 'enforceConst': true }],
+    'no-restricted-syntax': 'off',  // re-enable this in the future (3)
+    'react/forbid-prop-types': 'off', // re-enable this in the future (15)
+    'react/jsx-boolean-value': ['error', 'always'],
+    'react/no-danger': 'off', // re-enable this in the future (2)
+    'react/no-find-dom-node': 'off', // re-enable this in the future (4)
+    'react/no-string-refs': 'off', // re-enable this in the future (1)
+    'react/no-unused-prop-types': 'off', // re-enable, there's a bug in eslint that leads to false-positives
+    'react/require-default-props': 'off',
+  },
+}
