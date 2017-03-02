@@ -57,6 +57,24 @@ ruleTester.run('no-unrestored-sinon-before-expect', rule, {
       globals: ['it'],
       parserOptions: { ecmaVersion: 6 },
     },
+    {
+      code: `it("should ignore naked spies", function() {
+        var ajaxSpy = sinon.spy();
+        ajaxSpy();
+        expect(ajaxSpy.callCount).to.equal(1);
+      });`,
+      parserOptions: { ecmaVersion: 6 },
+      globals: ['it'],
+    },
+    {
+      code: `it("should ignore naked stubs", function() {
+        var someStub = sinon.stub();
+        someStub();
+        expect(someStub.callCount).to.equal(1);
+      });`,
+      parserOptions: { ecmaVersion: 6 },
+      globals: ['it'],
+    },
   ],
 
   invalid: [
