@@ -1,5 +1,5 @@
 /**
- * @fileoverview tests for no-unstubbed-sinon-before-expect
+ * @fileoverview tests for no-unrestored-sinon-before-expect
  * @author Evan Lloyd
  */
 "use strict";
@@ -8,7 +8,7 @@
 // Requirements
 //------------------------------------------------------------------------------
 
-var rule = require("../../../lib/rules/no-unstubbed-sinon-before-expect"),
+var rule = require("../../../lib/rules/no-unrestored-sinon-before-expect"),
 
   RuleTester = require("eslint").RuleTester;
 
@@ -18,7 +18,7 @@ var rule = require("../../../lib/rules/no-unstubbed-sinon-before-expect"),
 //------------------------------------------------------------------------------
 
 var ruleTester = new RuleTester();
-ruleTester.run("no-unstubbed-sinon-before-expect", rule, {
+ruleTester.run("no-unrestored-sinon-before-expect", rule, {
 
   valid: [
     {
