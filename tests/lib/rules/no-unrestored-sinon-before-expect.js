@@ -14,6 +14,7 @@ const RuleTester = require('eslint').RuleTester;
 // Tests
 //------------------------------------------------------------------------------
 
+const parserOptions = { ecmaVersion: 6 };
 const ruleTester = new RuleTester();
 ruleTester.run('no-unrestored-sinon-before-expect', rule, {
 
@@ -24,8 +25,7 @@ ruleTester.run('no-unrestored-sinon-before-expect', rule, {
         ajaxStub.restore();
         expect(true).to.equal(true);
       });`,
-      globals: ['it'],
-      parserOptions: { ecmaVersion: 6 },
+      parserOptions,
     },
     {
       code: `it("passes with a promise", () => {
@@ -36,8 +36,7 @@ ruleTester.run('no-unrestored-sinon-before-expect', rule, {
           expect(true).to.equal(true);
         })
       });`,
-      globals: ['it'],
-      parserOptions: { ecmaVersion: 6 },
+      parserOptions,
     },
     {
       code: `it("passes with unstub before expect", function() {
@@ -45,8 +44,7 @@ ruleTester.run('no-unrestored-sinon-before-expect', rule, {
         ajaxStub.restore();
         expect(true).to.equal(true);
       });`,
-      globals: ['it'],
-      parserOptions: { ecmaVersion: 6 },
+      parserOptions,
     },
     {
       code: `it("passes when spy is restored before expect", () => {
@@ -54,8 +52,7 @@ ruleTester.run('no-unrestored-sinon-before-expect', rule, {
         ajaxSpy.restore();
         expect(true).to.equal(true);
       });`,
-      globals: ['it'],
-      parserOptions: { ecmaVersion: 6 },
+      parserOptions,
     },
     {
       code: `it("should ignore naked spies", function() {
@@ -63,8 +60,7 @@ ruleTester.run('no-unrestored-sinon-before-expect', rule, {
         ajaxSpy();
         expect(ajaxSpy.callCount).to.equal(1);
       });`,
-      parserOptions: { ecmaVersion: 6 },
-      globals: ['it'],
+      parserOptions,
     },
     {
       code: `it("should ignore naked stubs", function() {
@@ -72,8 +68,7 @@ ruleTester.run('no-unrestored-sinon-before-expect', rule, {
         someStub();
         expect(someStub.callCount).to.equal(1);
       });`,
-      parserOptions: { ecmaVersion: 6 },
-      globals: ['it'],
+      parserOptions,
     },
     {
       code: `describe("passing case with before/after hooks", function() {
@@ -85,8 +80,7 @@ ruleTester.run('no-unrestored-sinon-before-expect', rule, {
           spy.restore();
         });
       });`,
-      parserOptions: { ecmaVersion: 6 },
-      globals: ['it'],
+      parserOptions,
     },
     {
       code: `describe("passes with hooks and it block", function() {
@@ -104,8 +98,7 @@ ruleTester.run('no-unrestored-sinon-before-expect', rule, {
           expect(stub.called).to.equal(true);
         })
       });`,
-      parserOptions: { ecmaVersion: 6 },
-      globals: ['it'],
+      parserOptions,
     },
   ],
 
@@ -116,8 +109,7 @@ ruleTester.run('no-unrestored-sinon-before-expect', rule, {
         expect(true).to.equal(true);
         ajaxStub.restore();
       });`,
-      parserOptions: { ecmaVersion: 6 },
-      globals: ['it'],
+      parserOptions,
       errors: [{
         message: "Call 'ajaxStub.restore()' before 'expect'",
         type: 'CallExpression',
@@ -132,8 +124,7 @@ ruleTester.run('no-unrestored-sinon-before-expect', rule, {
           ajaxStub.restore();
         })
       });`,
-      parserOptions: { ecmaVersion: 6 },
-      globals: ['it'],
+      parserOptions,
       errors: [{
         message: "Call 'ajaxStub.restore()' before 'expect'",
         type: 'CallExpression',
@@ -145,8 +136,7 @@ ruleTester.run('no-unrestored-sinon-before-expect', rule, {
         expect(true).to.equal(true);
         ajaxSpy.restore();
       });`,
-      parserOptions: { ecmaVersion: 6 },
-      globals: ['it'],
+      parserOptions,
       errors: [{
         message: "Call 'ajaxSpy.restore()' before 'expect'",
         type: 'CallExpression',
@@ -160,8 +150,7 @@ ruleTester.run('no-unrestored-sinon-before-expect', rule, {
         ajaxSpy.restore();
         someStub.restore();
       });`,
-      parserOptions: { ecmaVersion: 6 },
-      globals: ['it'],
+      parserOptions,
       errors: [
         {
           message: "Call 'ajaxSpy.restore()' before 'expect'",
@@ -181,8 +170,7 @@ ruleTester.run('no-unrestored-sinon-before-expect', rule, {
         expect(true).to.equal(true);
         ajaxSpy.restore();
       });`,
-      parserOptions: { ecmaVersion: 6 },
-      globals: ['it'],
+      parserOptions,
       errors: [
         {
           message: "Call 'ajaxSpy.restore()' before 'expect'",
@@ -199,8 +187,7 @@ ruleTester.run('no-unrestored-sinon-before-expect', rule, {
         afterEach(() => {
         });
       });`,
-      parserOptions: { ecmaVersion: 6 },
-      globals: ['it'],
+      parserOptions,
       errors: [
         {
           message: "Call 'spy.restore()' in an 'afterEach' block",
@@ -219,8 +206,7 @@ ruleTester.run('no-unrestored-sinon-before-expect', rule, {
         expect(true).to.equal(true);
         ajaxSpy.restore();
       });`,
-      parserOptions: { ecmaVersion: 6 },
-      globals: ['it'],
+      parserOptions,
       errors: [
         {
           message: "Call 'ajaxSpy.restore()' before 'expect'",
@@ -241,8 +227,7 @@ ruleTester.run('no-unrestored-sinon-before-expect', rule, {
           expect(stub.callCount).to.equal(1);
         });
       });`,
-      parserOptions: { ecmaVersion: 6 },
-      globals: ['it'],
+      parserOptions,
       errors: [
         {
           message: "Call 'spy.restore()' in an 'afterEach' block",
