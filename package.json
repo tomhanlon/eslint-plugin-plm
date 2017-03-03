@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-plm",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Custom eslint rules for PatientsLikeMe js projects",
   "keywords": [
     "eslint",
