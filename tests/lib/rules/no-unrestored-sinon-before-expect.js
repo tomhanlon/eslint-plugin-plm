@@ -88,6 +88,25 @@ ruleTester.run('no-unrestored-sinon-before-expect', rule, {
       parserOptions: { ecmaVersion: 6 },
       globals: ['it'],
     },
+    {
+      code: `describe("passes with hooks and it block", function() {
+        let spy;
+        beforeEach(() => {
+          spy = sinon.spy(someHelper, 'someMethod');
+        });
+        afterEach(() => {
+          spy.restore();
+        });
+        it("passes", () => {
+          const stub = sinon.stub(helper, 'method');
+          stub();
+          stub.restore();
+          expect(stub.called).to.equal(true);
+        })
+      });`,
+      parserOptions: { ecmaVersion: 6 },
+      globals: ['it'],
+    },
   ],
 
   invalid: [
@@ -184,8 +203,8 @@ ruleTester.run('no-unrestored-sinon-before-expect', rule, {
       globals: ['it'],
       errors: [
         {
-          message: "Call 'ajaxSpy.restore()' before 'expect'",
-          type: 'CallExpression',
+          message: "Call 'spy.restore()' in an 'afterEach' block",
+          type: 'ArrowFunctionExpression',
         },
       ],
     },
@@ -205,6 +224,32 @@ ruleTester.run('no-unrestored-sinon-before-expect', rule, {
       errors: [
         {
           message: "Call 'ajaxSpy.restore()' before 'expect'",
+          type: 'CallExpression',
+        },
+      ],
+    },
+    {
+      code: `describe("it should report from hooks and it blocks", function() {
+        let spy;
+        beforeEach(() => {
+          spy = sinon.spy(someHelper, 'someMethod');
+        });
+        afterEach(() => {
+        });
+        it("fails here too", () => {
+          const stub = sinon.stub(myHelper, 'someMethod');
+          expect(stub.callCount).to.equal(1);
+        });
+      });`,
+      parserOptions: { ecmaVersion: 6 },
+      globals: ['it'],
+      errors: [
+        {
+          message: "Call 'spy.restore()' in an 'afterEach' block",
+          type: 'ArrowFunctionExpression',
+        },
+        {
+          message: "Call 'stub.restore()' before 'expect'",
           type: 'CallExpression',
         },
       ],
