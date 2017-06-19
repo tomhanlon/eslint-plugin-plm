@@ -242,14 +242,14 @@ ruleTester.run('no-unrestored-sinon-before-expect', rule, {
     {
       code: `describe("it should report when sinon.callsFake is used", function() {
         it("fails here too", () => {
-          const stub = sinon.stub(myHelper, 'someMethod').callsFake(() => {});
+          const helperStub = sinon.stub(myHelper, 'someMethod').callsFake(() => {});
           expect(stub.callCount).to.equal(1);
         });
       });`,
       parserOptions,
       errors: [
         {
-          message: "Call 'stub.restore()' before 'expect'",
+          message: "Call 'helperStub.restore()' before 'expect'",
           type: 'CallExpression',
         },
       ],
