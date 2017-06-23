@@ -1,3 +1,8 @@
+## v0.1.5
+> 2017-06-23
+
+* Add support for `sinon.stub.callsFake`
+
 ## v0.1.2
 > 2017-03-03
 
