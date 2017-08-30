@@ -17,6 +17,7 @@
     "lint:watch": "onchange \"**/*.js*\" \"test/**/*.js*\" -- yarn lint"
   },
   "dependencies": {
+    "lodash": "^4.17.4",
     "requireindex": "~1.1.0"
   },
   "devDependencies": {
