@@ -13,8 +13,8 @@ test suite.
 Examples of **incorrect** code for this rule:
 
 ```js
-it("should fail", function() {
-  var ajaxStub = sinon.stub(AjaxHelpers, 'post', ajaxCallBack);
+it("should fail", () => {
+  let ajaxStub = sinon.stub(AjaxHelpers, 'post', ajaxCallBack);
   expect(true).toEqual('cat');
   ajaxStub.restore();
 });
@@ -23,8 +23,8 @@ it("should fail", function() {
 Examples of **correct** code for this rule:
 
 ```js
-it("passes with unstub before expect", function() {
-  var ajaxStub = sinon.stub(AjaxHelpers, 'post', ajaxCallBack);
+it("passes with unstub before expect", () => {
+  let ajaxStub = sinon.stub(AjaxHelpers, 'post', ajaxCallBack);
   ajaxStub.restore();
   expect(true).toEqual('cat');
 });
