@@ -14,7 +14,7 @@ Examples of **incorrect** code for this rule:
 
 ```js
 it("should fail", () => {
-  let ajaxStub = sinon.stub(AjaxHelpers, 'post', ajaxCallBack);
+  const ajaxStub = sinon.stub(AjaxHelpers, 'post', ajaxCallBack);
   expect(true).toEqual('cat');
   ajaxStub.restore();
 });
@@ -24,7 +24,7 @@ Examples of **correct** code for this rule:
 
 ```js
 it("passes with unstub before expect", () => {
-  let ajaxStub = sinon.stub(AjaxHelpers, 'post', ajaxCallBack);
+  const ajaxStub = sinon.stub(AjaxHelpers, 'post', ajaxCallBack);
   ajaxStub.restore();
   expect(true).toEqual('cat');
 });
